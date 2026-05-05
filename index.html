@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paradise Cove Neighborhood</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Paradise Cove</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -25,15 +27,17 @@ body {
   background: var(--foam);
   color: var(--deep);
   min-height: 100vh;
+  padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  -webkit-text-size-adjust: 100%;
 }
 
-/* NAV */
+/* TOP NAV */
 nav {
   background: var(--deep);
-  padding: 0 2rem;
+  padding: env(safe-area-inset-top) 1.5rem 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -43,63 +47,72 @@ nav {
 .nav-logo {
   font-family: 'Playfair Display', serif;
   color: var(--sand);
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   padding: 1rem 0;
   letter-spacing: 1px;
+  text-align: center;
 }
 
 .nav-logo span { color: var(--gold); }
 
-.nav-links { display: flex; gap: 0; }
+/* BOTTOM TAB BAR */
+.tab-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--deep);
+  display: flex;
+  z-index: 200;
+  box-shadow: 0 -2px 20px rgba(0,0,0,0.3);
+  padding-bottom: env(safe-area-inset-bottom);
+}
 
-.nav-links button {
+.tab-bar button {
+  flex: 1;
   background: none;
   border: none;
-  color: #a8c8d0;
+  color: #7aaab6;
   font-family: 'Lato', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  padding: 1.4rem 1.4rem;
+  padding: 0.7rem 0.2rem 0.65rem;
   cursor: pointer;
-  transition: color 0.2s, background 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.nav-links button:hover,
-.nav-links button.active {
-  color: var(--sand);
-  background: rgba(255,255,255,0.08);
-}
-
-.nav-links button.active {
-  border-bottom: 3px solid var(--gold);
-}
+.tab-icon { font-size: 1.4rem; line-height: 1; }
+.tab-bar button.active { color: var(--gold); }
 
 /* PAGES */
-.page { display: none; animation: fadeIn 0.4s ease; }
+.page { display: none; animation: fadeIn 0.3s ease; }
 .page.active { display: block; }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 /* HERO */
 .hero {
   background: linear-gradient(160deg, var(--deep) 0%, var(--ocean) 60%, #2a9d8f 100%);
-  padding: 5rem 2rem 4rem;
+  padding: 3rem 1.5rem 4.5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-.hero::before {
+.hero::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 80px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80'%3E%3Cpath fill='%23e8f4f7' d='M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z'/%3E%3C/svg%3E") no-repeat bottom;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23e8f4f7' d='M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E") no-repeat bottom;
   background-size: cover;
 }
 
@@ -108,224 +121,184 @@ nav {
   background: rgba(255,255,255,0.15);
   border: 1px solid rgba(255,255,255,0.3);
   color: var(--sand);
-  font-size: 0.7rem;
-  letter-spacing: 3px;
+  font-size: 0.65rem;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
-  padding: 0.4rem 1.2rem;
+  padding: 0.35rem 1rem;
   border-radius: 20px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
 }
+
+.hero-waves { font-size: 2rem; letter-spacing: 0.4rem; margin-bottom: 1rem; }
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-size: clamp(2.2rem, 10vw, 4rem);
   color: white;
   line-height: 1.1;
   margin-bottom: 0.5rem;
 }
 
-.hero h1 em {
-  color: var(--gold);
-  font-style: italic;
-}
+.hero h1 em { color: var(--gold); font-style: italic; }
 
 .hero p {
   color: rgba(255,255,255,0.8);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 300;
-  max-width: 500px;
-  margin: 1rem auto 2.5rem;
+  max-width: 320px;
+  margin: 0.8rem auto 0;
   line-height: 1.7;
 }
 
-.hero-waves {
-  font-size: 2.5rem;
-  letter-spacing: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-/* CONTENT SECTIONS */
+/* CONTENT */
 .section {
-  max-width: 900px;
+  max-width: 600px;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
+  padding: 2rem 1.2rem;
 }
 
 .section-title {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
+  font-size: 1.7rem;
   color: var(--deep);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .section-line {
-  width: 50px;
-  height: 3px;
+  width: 40px; height: 3px;
   background: var(--coral);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 /* HOME CARDS */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
+.cards { display: flex; flex-direction: column; gap: 1rem; }
 
 .card {
   background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(26,107,124,0.08);
-  border-top: 4px solid var(--ocean);
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 3px 16px rgba(26,107,124,0.09);
+  border-left: 4px solid var(--ocean);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(26,107,124,0.15);
-}
+.card:active { transform: scale(0.98); }
+.card-icon { font-size: 2rem; flex-shrink: 0; margin-top: 2px; }
 
-.card-icon { font-size: 2.2rem; margin-bottom: 1rem; }
-
-.card h3 {
+.card-body h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
   color: var(--deep);
 }
 
-.card p {
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.6;
-}
+.card-body p { font-size: 0.88rem; color: #666; line-height: 1.5; }
 
 .card-link {
   display: inline-block;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   color: var(--ocean);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  text-decoration: none;
 }
 
 /* BUSINESS PAGE */
 .biz-intro {
   background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(26,107,124,0.08);
-  margin-bottom: 2rem;
-  border-left: 5px solid var(--palm);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 3px 16px rgba(26,107,124,0.08);
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--palm);
 }
 
-.biz-intro p {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #444;
-}
+.biz-intro p { font-size: 0.95rem; line-height: 1.8; color: #444; }
 
 .agreement-box {
   background: white;
-  border-radius: 16px;
-  padding: 2.5rem;
-  box-shadow: 0 4px 20px rgba(26,107,124,0.1);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 3px 16px rgba(26,107,124,0.09);
   border: 1px solid #dde8ec;
-  font-family: 'Lato', sans-serif;
 }
 
 .agreement-box h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   color: var(--deep);
   border-bottom: 2px solid var(--ocean);
-  padding-bottom: 0.8rem;
-  margin-bottom: 1.5rem;
+  padding-bottom: 0.7rem;
+  margin-bottom: 1.2rem;
 }
 
-.agreement-field {
-  margin-bottom: 1.5rem;
-}
+.agreement-field { margin-bottom: 1.2rem; }
 
 .agreement-field label {
   display: block;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--ocean);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
 }
 
-.agreement-field p {
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: #333;
-}
-
-.sig-line {
-  border-bottom: 1px solid #999;
-  height: 2rem;
-  margin-top: 0.5rem;
-}
-
-.sig-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
+.agreement-field p { font-size: 0.9rem; line-height: 1.7; color: #333; }
+.sig-line { border-bottom: 1px solid #bbb; height: 1.8rem; margin-top: 0.3rem; }
+.sig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
 .contact-btn {
-  display: inline-block;
-  margin-top: 2rem;
+  display: block;
+  margin-top: 1.5rem;
   background: var(--ocean);
   color: white;
-  padding: 0.9rem 2rem;
-  border-radius: 8px;
+  padding: 1rem;
+  border-radius: 10px;
   font-weight: 700;
   font-size: 0.9rem;
   letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background 0.2s;
+  text-align: center;
 }
 
-.contact-btn:hover { background: var(--deep); }
-
-/* COMING SOON PAGE */
+/* COMING SOON */
 .coming-soon {
   text-align: center;
-  padding: 4rem 1.5rem 5rem;
+  padding: 3rem 1.5rem 4rem;
 }
 
-.coming-soon .big-icon {
-  font-size: 5rem;
-  margin-bottom: 1.5rem;
+.big-icon {
+  font-size: 4.5rem;
+  margin-bottom: 1.2rem;
+  display: block;
   animation: bob 3s ease-in-out infinite;
 }
 
 @keyframes bob {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-10px); }
 }
 
 .coming-soon h2 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-size: clamp(1.8rem, 8vw, 3rem);
   color: var(--deep);
   margin-bottom: 1rem;
 }
 
 .coming-soon p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #666;
-  max-width: 480px;
-  margin: 0 auto 2rem;
+  max-width: 300px;
+  margin: 0 auto 1.5rem;
   line-height: 1.7;
 }
 
@@ -333,66 +306,34 @@ nav {
   display: inline-block;
   background: var(--coral);
   color: white;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 1.3rem;
   border-radius: 20px;
 }
 
 .preview-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  max-width: 700px;
-  margin: 3rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 340px;
+  margin: 2rem auto 0;
 }
 
 .preview-card {
   background: white;
   border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 12px rgba(26,107,124,0.08);
-  opacity: 0.45;
+  padding: 1.2rem;
+  box-shadow: 0 2px 10px rgba(26,107,124,0.07);
+  opacity: 0.4;
   filter: blur(1px);
 }
 
-.preview-card .ph-name {
-  height: 14px;
-  background: #ccc;
-  border-radius: 4px;
-  margin-bottom: 0.6rem;
-  width: 70%;
-}
-
-.preview-card .ph-text {
-  height: 10px;
-  background: #e0e0e0;
-  border-radius: 4px;
-  width: 90%;
-  margin-bottom: 0.4rem;
-}
-
-.preview-card .ph-badge {
-  height: 10px;
-  background: #f0c0a0;
-  border-radius: 20px;
-  width: 50%;
-  margin-top: 0.8rem;
-}
-
-/* FOOTER */
-footer {
-  background: var(--deep);
-  color: rgba(255,255,255,0.5);
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-}
-
-footer span { color: var(--gold); font-family: 'Playfair Display', serif; }
+.ph-name { height: 12px; background: #ccc; border-radius: 4px; margin-bottom: 0.5rem; width: 60%; }
+.ph-text { height: 9px; background: #e0e0e0; border-radius: 4px; width: 90%; margin-bottom: 0.35rem; }
+.ph-badge { height: 9px; background: #f0c0a0; border-radius: 20px; width: 45%; margin-top: 0.6rem; }
 ```
 
   </style>
@@ -401,11 +342,6 @@ footer span { color: var(--gold); font-family: 'Playfair Display', serif; }
 
 <nav>
   <div class="nav-logo">🌴 <span>Paradise Cove</span></div>
-  <div class="nav-links">
-    <button class="active" onclick="showPage('home', this)">Home</button>
-    <button onclick="showPage('business', this)">For Businesses</button>
-    <button onclick="showPage('discounts', this)">Discounts</button>
-  </div>
 </nav>
 
 <!-- HOME -->
@@ -415,30 +351,30 @@ footer span { color: var(--gold); font-family: 'Playfair Display', serif; }
     <div class="hero-badge">🌊 Neighborhood Program</div>
     <div class="hero-waves">🌴 🐚 🌺</div>
     <h1>Welcome to<br><em>Paradise Cove</em></h1>
-    <p>Your neighborhood discount program — connecting residents with the local businesses that make our community special.</p>
+    <p>Connecting residents with local businesses that make our community special.</p>
   </div>
 
   <div class="section">
     <div class="section-title">What We're About</div>
     <div class="section-line"></div>
     <div class="cards">
-      <div class="card" onclick="showPage('discounts', document.querySelectorAll('.nav-links button')[2])">
+      <div class="card" onclick="showPage('discounts', 2)">
         <div class="card-icon">🍽️</div>
-        <h3>Member Discounts</h3>
-        <p>Exclusive deals at local restaurants and businesses — just show your Paradise Cove membership card.</p>
-        <span class="card-link">View Discounts →</span>
+        <div class="card-body">
+          <h3>Member Discounts</h3>
+          <p>Exclusive deals at local restaurants — just show your Paradise Cove membership card.</p>
+          <span class="card-link">View Discounts →</span>
+        </div>
       </div>
-      <div class="card" onclick="showPage('business', document.querySelectorAll('.nav-links button')[1])">
+      <div class="card" onclick="showPage('business', 1)">
         <div class="card-icon">🤝</div>
-        <h3>For Local Businesses</h3>
-        <p>Are you a local business? Join our discount program and connect with the Paradise Cove community.</p>
-        <span class="card-link">Learn More →</span>
+        <div class="card-body">
+          <h3>For Local Businesses</h3>
+          <p>Join our discount program and connect with the Paradise Cove community.</p>
+          <span class="card-link">Learn More →</span>
+        </div>
       </div>
-
-```
-</div>
-```
-
+    </div>
   </div>
 </div>
 
@@ -451,11 +387,11 @@ footer span { color: var(--gold); font-family: 'Playfair Display', serif; }
 
 ```
 <div class="biz-intro">
-  <p>Thank you for supporting the <strong>Paradise Cove Neighborhood</strong>. By joining our discount program, your business gets direct exposure to our residents while giving back to the community. The program renews annually — and you set the discount that works for you.</p>
+  <p>Thank you for supporting <strong>Paradise Cove</strong>. By joining, your business gets direct exposure to our residents while giving back to the community. The program renews annually — and you set the discount that works for you.</p>
 </div>
 
 <div class="agreement-box">
-  <h2>Paradise Cove Discount Program</h2>
+  <h2>Discount Program Agreement</h2>
 
   <div class="agreement-field">
     <label>Name of Business</label>
@@ -467,7 +403,7 @@ footer span { color: var(--gold); font-family: 'Playfair Display', serif; }
   </div>
 
   <div class="agreement-field">
-    <p>It should be noted that only one membership card is given per household, so the card being presented should be honored for the bill of the patrons with the card holder.</p>
+    <p>Only one membership card is given per household. The card being presented should be honored for the bill of all patrons dining with the card holder.</p>
   </div>
 
   <div class="agreement-field">
@@ -489,18 +425,15 @@ footer span { color: var(--gold); font-family: 'Playfair Display', serif; }
       <label>Signature</label>
       <div class="sig-line"></div>
     </div>
-    <div></div>
-  </div>
-
-  <div class="sig-row">
-    <div class="agreement-field">
-      <label>Title</label>
-      <div class="sig-line"></div>
-    </div>
     <div class="agreement-field">
       <label>Date</label>
       <div class="sig-line"></div>
     </div>
+  </div>
+
+  <div class="agreement-field">
+    <label>Title</label>
+    <div class="sig-line"></div>
   </div>
 
   <div class="agreement-field">
@@ -517,10 +450,10 @@ footer span { color: var(--gold); font-family: 'Playfair Display', serif; }
 <!-- DISCOUNTS PAGE -->
 
 <div class="page" id="page-discounts">
-  <div class="section coming-soon">
-    <div class="big-icon">🌊</div>
+  <div class="coming-soon">
+    <span class="big-icon">🌊</span>
     <h2>Discounts<br>Coming Soon</h2>
-    <p>We're currently signing up local restaurants and businesses. Check back soon — great deals are on their way for Paradise Cove residents!</p>
+    <p>We're signing up local restaurants and businesses. Great deals are on the way for Paradise Cove residents!</p>
     <div class="soon-badge">🌴 Coming Soon</div>
 
 ```
@@ -532,16 +465,10 @@ footer span { color: var(--gold); font-family: 'Playfair Display', serif; }
     <div class="ph-badge"></div>
   </div>
   <div class="preview-card">
-    <div class="ph-name" style="width:55%"></div>
+    <div class="ph-name" style="width:50%"></div>
     <div class="ph-text"></div>
-    <div class="ph-text" style="width:75%"></div>
-    <div class="ph-badge"></div>
-  </div>
-  <div class="preview-card">
-    <div class="ph-name" style="width:80%"></div>
-    <div class="ph-text" style="width:50%"></div>
-    <div class="ph-text"></div>
-    <div class="ph-badge" style="width:40%"></div>
+    <div class="ph-text" style="width:70%"></div>
+    <div class="ph-badge" style="width:38%"></div>
   </div>
 </div>
 ```
@@ -549,16 +476,26 @@ footer span { color: var(--gold); font-family: 'Playfair Display', serif; }
   </div>
 </div>
 
-<footer>
-  &copy; 2025 <span>Paradise Cove</span> Neighborhood &nbsp;·&nbsp; All rights reserved
-</footer>
+<!-- BOTTOM TAB BAR -->
+
+<div class="tab-bar">
+  <button class="active" onclick="showPage('home', 0)">
+    <span class="tab-icon">🏠</span>Home
+  </button>
+  <button onclick="showPage('business', 1)">
+    <span class="tab-icon">🤝</span>Businesses
+  </button>
+  <button onclick="showPage('discounts', 2)">
+    <span class="tab-icon">🏷️</span>Discounts
+  </button>
+</div>
 
 <script>
-  function showPage(name, btn) {
+  function showPage(name, tabIndex) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
     document.getElementById('page-' + name).classList.add('active');
-    if (btn) btn.classList.add('active');
+    document.querySelectorAll('.tab-bar button')[tabIndex].classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
