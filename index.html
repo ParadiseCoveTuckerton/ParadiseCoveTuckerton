@@ -31,7 +31,6 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-/* TOP NAV */
 nav {
   background: var(--deep);
   padding: env(safe-area-inset-top) 1.5rem 0;
@@ -55,7 +54,6 @@ nav {
 
 .nav-logo span { color: var(--gold); }
 
-/* BOTTOM TAB BAR */
 .tab-bar {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -72,11 +70,11 @@ nav {
   border: none;
   color: #7aaab6;
   font-family: 'Lato', sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  padding: 0.7rem 0.2rem 0.65rem;
+  padding: 0.7rem 0.1rem 0.65rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -86,10 +84,9 @@ nav {
   -webkit-tap-highlight-color: transparent;
 }
 
-.tab-icon { font-size: 1.4rem; line-height: 1; }
+.tab-icon { font-size: 1.25rem; line-height: 1; }
 .tab-bar button.active { color: var(--gold); }
 
-/* PAGES */
 .page { display: none; animation: fadeIn 0.3s ease; }
 .page.active { display: block; }
 
@@ -100,57 +97,85 @@ nav {
 
 /* HERO */
 .hero {
-  background: linear-gradient(160deg, var(--deep) 0%, var(--ocean) 60%, #2a9d8f 100%);
-  padding: 3rem 1.5rem 4.5rem;
-  text-align: center;
   position: relative;
+  height: 55vw;
+  min-height: 240px;
+  max-height: 380px;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
 }
 
-.hero::after {
-  content: '';
+.hero-img {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 60px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23e8f4f7' d='M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E") no-repeat bottom;
-  background-size: cover;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
 }
 
-.hero-badge {
-  display: inline-block;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: var(--sand);
-  font-size: 0.65rem;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  padding: 0.35rem 1rem;
-  border-radius: 20px;
-  margin-bottom: 1.2rem;
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(13,61,71,0.25) 0%, rgba(13,61,71,0.78) 100%);
 }
 
-.hero-waves { font-size: 2rem; letter-spacing: 0.4rem; margin-bottom: 1rem; }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 1.5rem 1.5rem 2rem;
+  text-align: center;
+}
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.2rem, 10vw, 4rem);
+  font-size: clamp(1.8rem, 8vw, 3.2rem);
   color: white;
   line-height: 1.1;
-  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
 .hero h1 em { color: var(--gold); font-style: italic; }
 
-.hero p {
-  color: rgba(255,255,255,0.8);
-  font-size: 1rem;
+.hero-location {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.8rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
   font-weight: 300;
-  max-width: 320px;
-  margin: 0.8rem auto 0;
-  line-height: 1.7;
 }
 
-/* CONTENT */
+/* FB BANNER */
+.fb-banner {
+  background: #1877f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0.9rem 1.2rem;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fb-banner:active { opacity: 0.85; }
+
+.fb-icon {
+  background: white;
+  color: #1877f2;
+  font-weight: 900;
+  font-size: 1rem;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-family: Georgia, serif;
+}
+
+.fb-text { color: white; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; }
+.fb-arrow { color: rgba(255,255,255,0.7); font-size: 1rem; }
+
 .section {
   max-width: 600px;
   margin: 0 auto;
@@ -164,13 +189,8 @@ nav {
   margin-bottom: 0.4rem;
 }
 
-.section-line {
-  width: 40px; height: 3px;
-  background: var(--coral);
-  margin-bottom: 1.5rem;
-}
+.section-line { width: 40px; height: 3px; background: var(--coral); margin-bottom: 1.5rem; }
 
-/* HOME CARDS */
 .cards { display: flex; flex-direction: column; gap: 1rem; }
 
 .card {
@@ -209,7 +229,7 @@ nav {
   text-transform: uppercase;
 }
 
-/* BUSINESS PAGE */
+/* BUSINESS / FORM PAGE */
 .biz-intro {
   background: white;
   border-radius: 14px;
@@ -221,7 +241,7 @@ nav {
 
 .biz-intro p { font-size: 0.95rem; line-height: 1.8; color: #444; }
 
-.agreement-box {
+.form-box {
   background: white;
   border-radius: 14px;
   padding: 1.5rem;
@@ -229,51 +249,103 @@ nav {
   border: 1px solid #dde8ec;
 }
 
-.agreement-box h2 {
+.form-box h2 {
   font-family: 'Playfair Display', serif;
   font-size: 1.4rem;
   color: var(--deep);
   border-bottom: 2px solid var(--ocean);
   padding-bottom: 0.7rem;
+  margin-bottom: 1.4rem;
+}
+
+.form-group { margin-bottom: 1.2rem; }
+
+.form-group label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #c8dde3;
+  border-radius: 8px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  color: var(--deep);
+  background: #f8fbfc;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--ocean);
+  background: white;
+}
+
+.form-group textarea { resize: vertical; min-height: 80px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.discount-note {
+  background: var(--foam);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.6;
   margin-bottom: 1.2rem;
 }
 
-.agreement-field { margin-bottom: 1.2rem; }
-
-.agreement-field label {
-  display: block;
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--ocean);
-  margin-bottom: 0.35rem;
-}
-
-.agreement-field p { font-size: 0.9rem; line-height: 1.7; color: #333; }
-.sig-line { border-bottom: 1px solid #bbb; height: 1.8rem; margin-top: 0.3rem; }
-.sig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-.contact-btn {
-  display: block;
-  margin-top: 1.5rem;
+.submit-btn {
+  width: 100%;
   background: var(--ocean);
   color: white;
+  border: none;
   padding: 1rem;
   border-radius: 10px;
+  font-family: 'Lato', sans-serif;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 1rem;
   letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
-  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  margin-top: 0.5rem;
 }
 
-/* COMING SOON */
-.coming-soon {
+.submit-btn:active { background: var(--deep); }
+
+/* SUCCESS STATE */
+.success-msg {
+  display: none;
   text-align: center;
-  padding: 3rem 1.5rem 4rem;
+  padding: 2rem 1rem;
 }
+
+.success-msg .success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+
+.success-msg h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--palm);
+  margin-bottom: 0.5rem;
+}
+
+.success-msg p { color: #666; font-size: 0.95rem; line-height: 1.6; }
+
+/* COMING SOON */
+.coming-soon { text-align: center; padding: 3rem 1.5rem 4rem; }
 
 .big-icon {
   font-size: 4.5rem;
@@ -294,13 +366,7 @@ nav {
   margin-bottom: 1rem;
 }
 
-.coming-soon p {
-  font-size: 1rem;
-  color: #666;
-  max-width: 300px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.7;
-}
+.coming-soon p { font-size: 1rem; color: #666; max-width: 300px; margin: 0 auto 1.5rem; line-height: 1.7; }
 
 .soon-badge {
   display: inline-block;
@@ -314,26 +380,111 @@ nav {
   border-radius: 20px;
 }
 
-.preview-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  max-width: 340px;
-  margin: 2rem auto 0;
-}
+.preview-cards { display: flex; flex-direction: column; gap: 0.8rem; max-width: 340px; margin: 2rem auto 0; }
 
 .preview-card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.2rem;
+  background: white; border-radius: 12px; padding: 1.2rem;
   box-shadow: 0 2px 10px rgba(26,107,124,0.07);
-  opacity: 0.4;
-  filter: blur(1px);
+  opacity: 0.4; filter: blur(1px);
 }
 
 .ph-name { height: 12px; background: #ccc; border-radius: 4px; margin-bottom: 0.5rem; width: 60%; }
 .ph-text { height: 9px; background: #e0e0e0; border-radius: 4px; width: 90%; margin-bottom: 0.35rem; }
 .ph-badge { height: 9px; background: #f0c0a0; border-radius: 20px; width: 45%; margin-top: 0.6rem; }
+
+/* CONTACT PAGE */
+.contact-page { max-width: 600px; margin: 0 auto; padding: 2rem 1.2rem; }
+
+.contact-hero { text-align: center; padding: 1.5rem 0 2rem; }
+.contact-hero .c-icon { font-size: 3.5rem; display: block; margin-bottom: 1rem; }
+
+.contact-hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  color: var(--deep);
+  margin-bottom: 0.5rem;
+}
+
+.contact-hero p { color: #666; font-size: 0.95rem; line-height: 1.6; max-width: 280px; margin: 0 auto; }
+
+.contact-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.8rem;
+  box-shadow: 0 3px 20px rgba(26,107,124,0.1);
+  margin-bottom: 1rem;
+}
+
+.contact-card-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 0.6rem;
+}
+
+.contact-email-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+}
+
+.email-icon-wrap {
+  width: 48px; height: 48px;
+  background: var(--ocean);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.email-details h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--deep); margin-bottom: 0.2rem; }
+.email-details span { font-size: 0.82rem; color: var(--ocean); font-weight: 700; word-break: break-all; }
+.email-arrow { margin-left: auto; color: #bbb; font-size: 1.2rem; }
+
+.email-btn {
+  display: block;
+  margin-top: 1.2rem;
+  background: var(--ocean);
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  text-align: center;
+}
+
+.fb-contact-card {
+  background: #1877f2;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fb-contact-card:active { opacity: 0.85; }
+
+.fb-contact-icon {
+  background: white;
+  color: #1877f2;
+  font-weight: 900;
+  font-size: 1.2rem;
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-family: Georgia, serif;
+}
+
+.fb-contact-text h3 { color: white; font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
+.fb-contact-text p { color: rgba(255,255,255,0.8); font-size: 0.82rem; }
+.fb-contact-arrow { margin-left: auto; color: rgba(255,255,255,0.6); font-size: 1.2rem; }
 ```
 
   </style>
@@ -348,11 +499,19 @@ nav {
 
 <div class="page active" id="page-home">
   <div class="hero">
-    <div class="hero-badge">🌊 Neighborhood Program</div>
-    <div class="hero-waves">🌴 🐚 🌺</div>
-    <h1>Welcome to<br><em>Paradise Cove</em></h1>
-    <p>Connecting residents with local businesses that make our community special.</p>
+    <img class="hero-img" src="flag.jpg" alt="Paradise Cove flag" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Welcome to<br><em>Paradise Cove</em></h1>
+      <div class="hero-location">🌊 Tuckerton, NJ</div>
+    </div>
   </div>
+
+  <a class="fb-banner" href="https://www.facebook.com/share/g/14e1aPE6NWK/?mibextid=wwXIfr" target="_blank" rel="noopener">
+    <div class="fb-icon">f</div>
+    <span class="fb-text">Join our Facebook Group</span>
+    <span class="fb-arrow">›</span>
+  </a>
 
   <div class="section">
     <div class="section-title">What We're About</div>
@@ -387,61 +546,73 @@ nav {
 
 ```
 <div class="biz-intro">
-  <p>Thank you for supporting <strong>Paradise Cove</strong>. By joining, your business gets direct exposure to our residents while giving back to the community. The program renews annually — and you set the discount that works for you.</p>
+  <p>Thank you for your interest in supporting <strong>Paradise Cove</strong>. Fill out the form below and we'll be in touch. The program renews annually — you set the discount that works for you.</p>
 </div>
 
-<div class="agreement-box">
-  <h2>Discount Program Agreement</h2>
+<div class="form-box">
+  <h2>Business Application</h2>
 
-  <div class="agreement-field">
-    <label>Name of Business</label>
-    <div class="sig-line"></div>
+  <!-- SUCCESS MESSAGE (shown after submit) -->
+  <div class="success-msg" id="successMsg">
+    <div class="success-icon">🎉</div>
+    <h3>Application Sent!</h3>
+    <p>Thanks for joining the Paradise Cove Discount Program. We'll be in touch soon at the email you provided.</p>
   </div>
 
-  <div class="agreement-field">
-    <p>Thank you for supporting the Paradise Cove Neighborhood. We are pleased that you have agreed to give our members a <strong>_______ % discount</strong> off the bill.</p>
-  </div>
+  <!-- FORM -->
+  <!-- ⚠️ REPLACE "YOUR_FORM_ID" below with your Formspree form ID -->
+  <form id="bizForm" action="https://formspree.io/f/xpqbrrrb" method="POST">
 
-  <div class="agreement-field">
-    <p>Only one membership card is given per household. The card being presented should be honored for the bill of all patrons dining with the card holder.</p>
-  </div>
-
-  <div class="agreement-field">
-    <p>We will renew this program annually unless we hear otherwise from you or your representative.</p>
-  </div>
-
-  <div class="agreement-field">
-    <label>Exceptions to the Program</label>
-    <div class="sig-line"></div>
-    <div class="sig-line" style="margin-top:0.5rem"></div>
-  </div>
-
-  <div class="agreement-field">
-    <p>I agree to participate in the discount program as listed above as a representative of the business.</p>
-  </div>
-
-  <div class="sig-row">
-    <div class="agreement-field">
-      <label>Signature</label>
-      <div class="sig-line"></div>
+    <div class="form-group">
+      <label>Business Name *</label>
+      <input type="text" name="business_name" placeholder="e.g. The Cove Grille" required />
     </div>
-    <div class="agreement-field">
-      <label>Date</label>
-      <div class="sig-line"></div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" name="contact_name" placeholder="First & Last" required />
+      </div>
+      <div class="form-group">
+        <label>Title / Role</label>
+        <input type="text" name="title" placeholder="e.g. Owner" />
+      </div>
     </div>
-  </div>
 
-  <div class="agreement-field">
-    <label>Title</label>
-    <div class="sig-line"></div>
-  </div>
+    <div class="form-group">
+      <label>Email Address *</label>
+      <input type="email" name="_replyto" placeholder="you@example.com" required />
+    </div>
 
-  <div class="agreement-field">
-    <p>If there are any questions, please feel free to reach out to us.</p>
-  </div>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="tel" name="phone" placeholder="(555) 000-0000" />
+    </div>
+
+    <div class="form-group">
+      <label>Discount % Offered to Members *</label>
+      <select name="discount_percent" required>
+        <option value="" disabled selected>Select a discount</option>
+        <option>5%</option>
+        <option>10%</option>
+        <option>15%</option>
+        <option>20%</option>
+        <option>Other (describe below)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Any Exceptions or Notes</label>
+      <textarea name="exceptions" placeholder="e.g. Not valid on holidays, alcohol excluded..."></textarea>
+    </div>
+
+    <div class="discount-note">
+      By submitting this form you agree to honor the Paradise Cove member discount for card holders. The program renews annually unless you notify us otherwise.
+    </div>
+
+    <button type="submit" class="submit-btn">✉️ Submit Application</button>
+  </form>
 </div>
-
-<a class="contact-btn" href="mailto:info@paradisecove.org">📬 Contact Us to Join</a>
 ```
 
   </div>
@@ -455,22 +626,55 @@ nav {
     <h2>Discounts<br>Coming Soon</h2>
     <p>We're signing up local restaurants and businesses. Great deals are on the way for Paradise Cove residents!</p>
     <div class="soon-badge">🌴 Coming Soon</div>
-
-```
-<div class="preview-cards">
-  <div class="preview-card">
-    <div class="ph-name"></div>
-    <div class="ph-text"></div>
-    <div class="ph-text" style="width:60%"></div>
-    <div class="ph-badge"></div>
-  </div>
-  <div class="preview-card">
-    <div class="ph-name" style="width:50%"></div>
-    <div class="ph-text"></div>
-    <div class="ph-text" style="width:70%"></div>
-    <div class="ph-badge" style="width:38%"></div>
+    <div class="preview-cards">
+      <div class="preview-card">
+        <div class="ph-name"></div>
+        <div class="ph-text"></div>
+        <div class="ph-text" style="width:60%"></div>
+        <div class="ph-badge"></div>
+      </div>
+      <div class="preview-card">
+        <div class="ph-name" style="width:50%"></div>
+        <div class="ph-text"></div>
+        <div class="ph-text" style="width:70%"></div>
+        <div class="ph-badge" style="width:38%"></div>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- CONTACT PAGE -->
+
+<div class="page" id="page-contact">
+  <div class="contact-page">
+    <div class="contact-hero">
+      <span class="c-icon">👋</span>
+      <h2>Get in Touch</h2>
+      <p>Have a question about the program? We'd love to hear from you.</p>
+    </div>
+
+```
+<div class="contact-card">
+  <div class="contact-card-label">Email Us</div>
+  <a class="contact-email-link" href="mailto:paradisecovetuckerton@gmail.com">
+    <div class="email-icon-wrap">📧</div>
+    <div class="email-details">
+      <h3>Paradise Cove</h3>
+      <span>paradisecovetuckerton@gmail.com</span>
+    </div>
+    <span class="email-arrow">›</span>
+  </a>
+  <a class="email-btn" href="mailto:paradisecovetuckerton@gmail.com">Send Us an Email</a>
+</div>
+
+<a class="fb-contact-card" href="https://www.facebook.com/share/g/14e1aPE6NWK/?mibextid=wwXIfr" target="_blank" rel="noopener">
+  <div class="fb-contact-icon">f</div>
+  <div class="fb-contact-text">
+    <h3>Facebook Group</h3>
+    <p>Join the conversation with neighbors</p>
+  </div>
+  <span class="fb-contact-arrow">›</span>
+</a>
 ```
 
   </div>
@@ -488,6 +692,9 @@ nav {
   <button onclick="showPage('discounts', 2)">
     <span class="tab-icon">🏷️</span>Discounts
   </button>
+  <button onclick="showPage('contact', 3)">
+    <span class="tab-icon">✉️</span>Contact
+  </button>
 </div>
 
 <script>
@@ -498,6 +705,36 @@ nav {
     document.querySelectorAll('.tab-bar button')[tabIndex].classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  // Handle form submission
+  const form = document.getElementById('bizForm');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('.submit-btn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+      } else {
+        btn.textContent = '✉️ Submit Application';
+        btn.disabled = false;
+        alert('Something went wrong. Please email us directly at paradisecovetuckerton@gmail.com');
+      }
+    } catch {
+      btn.textContent = '✉️ Submit Application';
+      btn.disabled = false;
+      alert('Something went wrong. Please email us directly at paradisecovetuckerton@gmail.com');
+    }
+  });
 </script>
 
 </body>
