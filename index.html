@@ -475,6 +475,52 @@
     .ph-text { height: 9px; background: #e0e0e0; border-radius: 4px; width: 90%; margin-bottom: 0.35rem; }
     .ph-badge { height: 9px; background: #f0c0a0; border-radius: 20px; width: 45%; margin-top: 0.6rem; }
 
+    /* BUSINESS GRID */
+    .biz-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+
+    .biz-card {
+      background: white;
+      border-radius: 14px;
+      padding: 1.4rem 1rem;
+      box-shadow: 0 3px 14px rgba(26,107,124,0.08);
+      border-top: 3px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0.5rem;
+      transition: transform 0.15s;
+    }
+
+    .biz-card:hover { transform: translateY(-2px); }
+
+    .biz-card-icon {
+      font-size: 2rem;
+      width: 52px; height: 52px;
+      background: var(--foam);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .biz-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: var(--deep);
+      font-weight: 700;
+    }
+
+    .biz-card-discount {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--coral);
+      letter-spacing: 0.5px;
+    }
+
     /* EVENTS PAGE */
     .event-card {
       background: white;
@@ -959,24 +1005,47 @@
 <!-- DISCOUNTS PAGE -->
 <div class="page" id="page-discounts">
   <button class="back-btn" onclick="showPage('home')">← Back</button>
-  <div class="coming-soon">
-    <span class="big-icon">🌊</span>
-    <h2>Discounts<br>Coming Soon</h2>
-    <p>We're signing up local restaurants and businesses. Great deals are on the way for Paradise Cove residents!</p>
-    <div class="soon-badge">🌴 Coming Soon</div>
-    <div class="preview-cards">
-      <div class="preview-card">
-        <div class="ph-name"></div>
-        <div class="ph-text"></div>
-        <div class="ph-text" style="width:60%"></div>
-        <div class="ph-badge"></div>
+  <div class="section">
+    <div class="section-title">Member Discounts</div>
+    <div class="section-line"></div>
+    <p style="font-size:0.9rem;color:#555;line-height:1.6;margin-bottom:1.5rem;">Show your Paradise Cove membership card at these local businesses to enjoy exclusive discounts. More partners coming soon!</p>
+
+    <div class="biz-grid">
+      <div class="biz-card">
+        <div class="biz-card-icon">🍽️</div>
+        <div class="biz-card-name">Coming Soon</div>
+        <div class="biz-card-discount">—% off</div>
       </div>
-      <div class="preview-card">
-        <div class="ph-name" style="width:50%"></div>
-        <div class="ph-text"></div>
-        <div class="ph-text" style="width:70%"></div>
-        <div class="ph-badge" style="width:38%"></div>
+      <div class="biz-card">
+        <div class="biz-card-icon">☕</div>
+        <div class="biz-card-name">Coming Soon</div>
+        <div class="biz-card-discount">—% off</div>
       </div>
+      <div class="biz-card">
+        <div class="biz-card-icon">🛒</div>
+        <div class="biz-card-name">Coming Soon</div>
+        <div class="biz-card-discount">—% off</div>
+      </div>
+      <div class="biz-card">
+        <div class="biz-card-icon">🍕</div>
+        <div class="biz-card-name">Coming Soon</div>
+        <div class="biz-card-discount">—% off</div>
+      </div>
+      <div class="biz-card">
+        <div class="biz-card-icon">🏪</div>
+        <div class="biz-card-name">Coming Soon</div>
+        <div class="biz-card-discount">—% off</div>
+      </div>
+      <div class="biz-card">
+        <div class="biz-card-icon">🎣</div>
+        <div class="biz-card-name">Coming Soon</div>
+        <div class="biz-card-discount">—% off</div>
+      </div>
+    </div>
+
+    <div class="newsletter-box" style="margin-top:1.5rem;">
+      <h3>Own a Local Business?</h3>
+      <p>Join the Paradise Cove Discount Program and reach our community of engaged residents. <a href="#" onclick="showPage('business');return false;" style="color:var(--ocean);font-weight:700;">Apply here →</a></p>
     </div>
   </div>
 </div>
@@ -1150,15 +1219,15 @@
 
     <div class="contact-card">
       <div class="contact-card-label">Email Us</div>
-      <a class="contact-email-link" href="mailto:paradisecovetuckerton@gmail.com">
+      <a class="contact-email-link" href="mailto:emilymoran.brock@gmail.com">
         <div class="email-icon-wrap">📧</div>
         <div class="email-details">
           <h3>Paradise Cove</h3>
-          <span>paradisecovetuckerton@gmail.com</span>
+          <span>Paradise Cove</span>
         </div>
         <span class="email-arrow">›</span>
       </a>
-      <a class="email-btn" href="mailto:paradisecovetuckerton@gmail.com">Send Us an Email</a>
+      <a class="email-btn" href="mailto:emilymoran.brock@gmail.com">Send Us an Email</a>
     </div>
 
     <a class="fb-contact-card" href="https://www.facebook.com/share/g/14e1aPE6NWK/?mibextid=wwXIfr" target="_blank" rel="noopener">
@@ -1191,7 +1260,7 @@
       'About My Pet:\n' + (petFact || 'Not provided') + '\n\n' +
       '(Please attach a photo of your pet!)'
     );
-    window.location.href = 'mailto:paradisecovetuckerton@gmail.com?subject=' + subject + '&body=' + body;
+    window.location.href = 'mailto:emilymoran.brock@gmail.com?subject=' + subject + '&body=' + body;
     document.getElementById('petFormWrap').style.display = 'none';
     document.getElementById('petSuccess').style.display = 'block';
   }
@@ -1218,12 +1287,12 @@
         } else {
           btn.textContent = '✉️ Submit Application';
           btn.disabled = false;
-          alert('Something went wrong. Please email us directly at paradisecovetuckerton@gmail.com');
+          alert('Something went wrong. Please email us directly at Paradise Cove.');
         }
       } catch {
         btn.textContent = '✉️ Submit Application';
         btn.disabled = false;
-        alert('Something went wrong. Please email us directly at paradisecovetuckerton@gmail.com');
+        alert('Something went wrong. Please email us directly at Paradise Cove.');
       }
     });
   }
@@ -1231,3 +1300,4 @@
 
 </body>
 </html>
+
