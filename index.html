@@ -1697,55 +1697,76 @@
     });
   }
 </script>
-  <!-- 4TH OF JULY FIREWORKS - one-time burst on load, expires July 6 -->
-  <canvas id="fireworks-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+  <!-- 4TH OF JULY FIREWORKS - burst on load with message, expires July 6 -->
+  <div id="fireworks-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;">
+    <canvas id="fireworks-canvas" style="width:100%;height:100%;"></canvas>
+    <div id="fireworks-msg" 
+  style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;opacity:0;transition:opacity 0.8s;">
+      <div style="font-size:3rem;">🎆🇺🇸🎆</div>
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(1.5rem,6vw,2.5rem);color:#fff;text-shadow:0 2px 20px 
+  rgba(0,0,0,0.8),0 0 40px rgba(255,100,50,0.5);margin-top:0.5rem;font-weight:700;">Happy Fourth of July<br>Weekend!</div>
+    </div>
+  </div>
   <script>
   (function() {
-    if (Date.now() > new Date('2026-07-06T05:59:00').getTime()) { document.getElementById('fireworks-canvas').remove(); return; }
+    if (Date.now() > new Date('2026-07-06T05:59:00').getTime()) { document.getElementById('fireworks-overlay').remove(); return; }
 
+    var overlay = document.getElementById('fireworks-overlay');
     var canvas = document.getElementById('fireworks-canvas');
     var ctx = canvas.getContext('2d');
+    var msg = document.getElementById('fireworks-msg');
     var particles = [];
-    var colors = ['#ff4444','#ffffff','#4488ff','#ffdd44','#ff6644','#44aaff'];
+    var colors = ['#ff2222','#ffffff','#2266ff','#ff4444','#ffdd44','#ff6644','#88bbff','#ff0000','#0044cc'];
 
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
 
     function explode(x, y) {
       var color = colors[Math.floor(Math.random()*colors.length)];
-      for (var i = 0; i < 40; i++) {
+      for (var i = 0; i < 60; i++) {
         var angle = Math.random() * Math.PI * 2;
-        var speed = 2 + Math.random() * 5;
-        particles.push({ x:x, y:y, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed, life:1, color:color, decay:0.012+Math.random()*0.01
+        var speed = 3 + Math.random() * 7;
+        particles.push({ x:x, y:y, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed, life:1, color:color, decay:0.008+Math.random()*0.008
   });
       }
     }
   
-    // Launch 5 bursts at random positions
-    for (var i = 0; i < 5; i++) {
+    // 8 big bursts staggered
+    for (var i = 0; i < 8; i++) {
       (function(delay) {
         setTimeout(function() {
-          explode(canvas.width*(0.2+Math.random()*0.6), canvas.height*(0.2+Math.random()*0.4));
+          explode(canvas.width*(0.15+Math.random()*0.7), canvas.height*(0.15+Math.random()*0.5));
         }, delay);
-      })(i * 300);
+      })(i * 250);
     }
+  
+    // Show message after first burst
+    setTimeout(function() { msg.style.opacity = '1'; }, 400);
+
+    // Fade everything out after 4 seconds
+    setTimeout(function() {
+      overlay.style.transition = 'opacity 1.5s';
+      overlay.style.opacity = '0';
+      setTimeout(function() { overlay.remove(); }, 1500);
+    }, 4000);
 
     function loop() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (var i = particles.length-1; i >= 0; i--) {
         var p = particles[i];
-        p.x += p.vx; p.y += p.vy; p.vy += 0.06; p.life -= p.decay;
+        p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.vx *= 0.98; p.life -= p.decay;
         if (p.life <= 0) { particles.splice(i, 1); continue; }
         ctx.globalAlpha = p.life;
-        ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+        ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI*2);
         ctx.fillStyle = p.color; ctx.fill();
       }
       ctx.globalAlpha = 1;
-      if (particles.length > 0) { requestAnimationFrame(loop); }
-      else { canvas.remove(); }
+      requestAnimationFrame(loop);
     }
     requestAnimationFrame(loop);
   })();
   </script>
+
+
 
 
 </body>
