@@ -1697,9 +1697,9 @@
     });
   }
 </script>
-  <!-- 4TH OF JULY FIREWORKS - burst on load with message, expires July 6 -->
-  <div id="fireworks-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;">
-    <canvas id="fireworks-canvas" style="width:100%;height:100%;"></canvas>
+   <!-- 4TH OF JULY FIREWORKS - burst on load with message, expires July 6 -->
+  <div id="fireworks-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:rgba(0,0,0,0.75);">
+    <canvas id="fireworks-canvas" style="width:100%;height:100%;position:absolute;top:0;left:0;"></canvas>
     <div id="fireworks-msg" 
   style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;opacity:0;transition:opacity 0.8s;">
       <div style="font-size:3rem;">🎆🇺🇸🎆</div>
@@ -1730,7 +1730,6 @@
       }
     }
   
-    // 8 big bursts staggered
     for (var i = 0; i < 8; i++) {
       (function(delay) {
         setTimeout(function() {
@@ -1738,11 +1737,9 @@
         }, delay);
       })(i * 250);
     }
-  
-    // Show message after first burst
+
     setTimeout(function() { msg.style.opacity = '1'; }, 400);
 
-    // Fade everything out after 4 seconds
     setTimeout(function() {
       overlay.style.transition = 'opacity 1.5s';
       overlay.style.opacity = '0';
@@ -1765,6 +1762,7 @@
     requestAnimationFrame(loop);
   })();
   </script>
+
 
 
 
